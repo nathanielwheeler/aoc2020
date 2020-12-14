@@ -59,19 +59,35 @@ func (s *server) day2p2() {
 
 	for _, str := range xs {
 		split := strings.Split(str, " ")
-		split[1] = strings.TrimSuffix(split[1], ":")
-		pwRune := split[1]
-		pwRuneRange := strings.Split(split[0], "-")
-		pwRuneMin, _ := strconv.Atoi(pwRuneRange[0])
-		pwRuneMax, _ := strconv.Atoi(pwRuneRange[1])
-		pw := split[2]
+    split[1] = strings.TrimSuffix(split[1], ":")
 
-		count := strings.Count(pw, pwRune)
-		if pwRuneMin <= count && count <= pwRuneMax {
+    pw := split[2]
+    
+    pwRune := split[1] // rune required
+    pwRuneByte := pwRune[0] // convert to byte for comparisons
+
+    // Turn the rune positions into the bytes representing those runes so that I can compare them
+		pwRunePos := strings.Split(split[0], "-")
+		pwRunePos1, _ := strconv.Atoi(pwRunePos[0])
+		pwRunePos2, _ := strconv.Atoi(pwRunePos[1])
+    pwRunePos1 = pwRunePos1 - 1
+		pwRunePos2 = pwRunePos2 - 1
+    pwRuneByte1 := pw[pwRunePos1]
+    pwRuneByte2 := pw[pwRunePos2]
+
+    // Check pwRunePos1 & 2, check that they have 1 instance of pwRune
+    condition := false
+    if pwRuneByte1 == pwRuneByte || pwRuneByte2 == pwRuneByte {
+      if pwRuneByte1 != pwRuneByte2 {
+        condition = true
+      }
+    }
+    
+		if condition {
 			valid++
 		}
 		continue
 	}
 
-	fmt.Printf("There are %d valid passwords\n", valid) // 414
+	fmt.Printf("There are %d valid passwords\n", valid) // 413
 }
