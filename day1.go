@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Find the two entries that sum to 2020; what do you get if you multiply them together?
 func (s *server) day1p1() {
 	xi := s.parseFileToXInt("day1")
 
@@ -22,6 +23,7 @@ func (s *server) day1p1() {
 	}
 }
 
+// In your expense report, what is the product of the three entries that sum to 2020?
 func (s *server) day1p2() {
 	xi := s.parseFileToXInt("day1")
 
