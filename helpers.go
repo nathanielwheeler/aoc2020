@@ -16,13 +16,33 @@ func (s *server) parseFileToXInt(filename string) []int {
 	}
 
 	scanner := bufio.NewScanner(data)
-	xs := []int{}
+	var xi []int
 
 	for scanner.Scan() {
 		line, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			s.panic("integer conversion failed", err)
 		}
+		xi = append(xi, line)
+	}
+
+	return xi
+}
+
+// parseFileToXStr takes in a relative filename and parses each line into a slice of string, performing a panic if there is any error.
+func (s *server) parseFileToXStr(filename string) []string {
+  filename = "input/" + filename + ".txt"
+
+	data, err := os.Open(filename)
+	if err != nil {
+		s.panic("Couldn't open file", err)
+	}
+
+	scanner := bufio.NewScanner(data)
+	var xs []string
+
+	for scanner.Scan() {
+		line := scanner.Text()
 		xs = append(xs, line)
 	}
 
