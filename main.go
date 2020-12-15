@@ -29,6 +29,8 @@ func main() {
     s.day3p2()
   case "4.1":
     s.day4p1()
+  case "4.2":
+    s.day4p2()
 	default:
 		s.logMsg("Invalid arg input.  Format: '<n>.<1|2>")
 	}
